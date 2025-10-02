@@ -1,0 +1,21 @@
+<%- include('../partials/head') %>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-800 min-h-screen">
+  <%- include('../partials/nav') %>
+  <main class="container mx-auto mt-20 text-center font-inter">
+    <h2 class="text-5xl md:text-6xl font-bold text-white mb-4">My Bookings</h2>
+    <p class="text-xl md:text-2xl text-gray-400 mb-8">Your bookings will appear here.</p>
+    
+    <div class="mt-16 p-8 bg-gray-900 border border-gray-700 rounded-lg shadow-xl max-w-xl mx-auto">
+        <p class="text-gray-300 text-lg mb-4">You don't have any active bookings yet.</p>
+        <a href="/explore" class="inline-block bg-purple-600 text-white py-3 px-8 rounded-lg font-bold hover:bg-purple-700 transition duration-300">
+            Start Exploring
+        </a>
+    </div>
+
+  </main>
+</body>
+</html>

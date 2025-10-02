@@ -1,0 +1,76 @@
+<header class="bg-gray-900 text-white p-4 shadow-lg sticky top-0 z-50">
+  <nav class="container mx-auto flex flex-col md:flex-row justify-between items-center font-inter">
+    <div class="flex justify-between w-full md:w-auto items-center">
+      <a href="/" class="text-2xl font-bold text-white hover:text-purple-400 transition duration-300">
+        airbnb
+      </a>
+      <button id="menu-toggle" class="md:hidden text-white hover:text-purple-400 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h4"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div id="menu" class="hidden md:flex md:flex-row flex-col items-center md:space-x-4 mt-4 md:mt-0 w-full md:w-auto">
+      <ul class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0 text-center w-full md:w-auto mb-4 md:mb-0">
+        <% if (isLogedin) { %>
+            <% if (user && user.usertype === 'guest') { %>
+                <li>
+                  <a href="/homes" class="block py-2 px-4 rounded transition duration-300 text-gray-300 hover:bg-gray-800 hover:text-white <%= currentPage === 'Home' ? 'bg-gray-800 text-white' : '' %>">
+                    Homes
+                  </a>
+                </li>
+                <li>
+                  <a href="/favourites" class="block py-2 px-4 rounded transition duration-300 text-gray-300 hover:bg-gray-800 hover:text-white <%= currentPage === 'favourites' ? 'bg-gray-800 text-white' : '' %>">
+                    Favourites
+                  </a>
+                </li>
+                <li>
+                  <a href="/bookings" class="block py-2 px-4 rounded transition duration-300 text-gray-300 hover:bg-gray-800 hover:text-white <%= currentPage === 'bookings' ? 'bg-gray-800 text-white' : '' %>">
+                    Bookings
+                  </a>
+                </li>
+            <% } else{ %>
+            
+                  <li>
+                    <a href="/host/host-home-list" class="block py-2 px-4 rounded transition duration-300 text-gray-300 hover:bg-gray-800 hover:text-white <%= currentPage === 'host-homes' ? 'bg-gray-800 text-white' : '' %>">
+                      Host Homes
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/host/add-home" class="block py-2 px-4 rounded transition duration-300 text-gray-300 hover:bg-gray-800 hover:text-white <%= currentPage === 'addHome' ? 'bg-gray-800 text-white' : '' %>">
+                      Add Home
+                    </a>
+                  </li>
+            <% } %>
+        <% } %>
+      </ul>
+
+      <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 w-full md:w-auto">
+        <% if (!isLogedin) { %>
+        <a href="/login" class="bg-purple-600 text-white py-2 px-6 rounded-lg font-bold hover:bg-purple-700 transition duration-300 text-center">
+          Login
+        </a>
+        <a href="/signup" class="bg-purple-600 text-white py-2 px-6 rounded-lg font-bold hover:bg-purple-700 transition duration-300 text-center">
+          Signup
+        </a>
+        <% } else { %>
+        <form action="/logout" method="POST" class="w-full md:w-auto">
+          <button type="submit" class="bg-red-600 text-white py-2 px-6 rounded-lg font-bold hover:bg-red-700 transition duration-300 w-full">
+            Logout
+          </button>
+        </form>
+        <% } %>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+
+    menuToggle.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+    });
+</script>

@@ -1,0 +1,107 @@
+<%- include('../partials/head') %>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-800 min-h-screen font-inter text-gray-200">
+  <%- include('../partials/nav') %>
+  <main class="container mx-auto mt-20 p-8">
+    <div class="max-w-xl mx-auto bg-gray-900 rounded-xl shadow-xl p-8 sm:p-10">
+      <div class="text-center">
+        <h1 class="text-3xl sm:text-4xl font-bold mb-2 text-white"><%= editing ? "Edit" : "Register"%> Your Home</h1>
+        <p class="text-gray-400 mb-6 sm:mb-8">Share your space with the world.</p>
+      </div>
+      <form action="/host/<%= editing ? "edit-home" : "add-home" %>" method="POST" enctype="multipart/form-data" class="space-y-6">
+        <input type="hidden" name="id" value="<%= editing ? home._id : ''%>" />
+        
+        <div>
+          <label for="houseName" class="sr-only">House Name</label>
+          <input
+            type="text"
+            id="houseName"
+            name="houseName"
+            value="<%= editing ? home.houseName : ''%>"
+            placeholder="Enter your House Name"
+            required
+            class="w-full px-5 py-3 border border-gray-700 rounded-md bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-200"
+          />
+        </div>
+        
+        <div>
+          <label for="price" class="sr-only">Price Per Night</label>
+          <input
+            type="text"
+            id="price"
+            name="price"
+            value="<%= editing ? home.price : ''%>"
+            placeholder="Price Per Night (Rs)"
+            required
+            class="w-full px-5 py-3 border border-gray-700 rounded-md bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-200"
+          />
+        </div>
+
+        <div>
+          <label for="location" class="sr-only">Location</label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            value="<%= editing ? home.location : ''%>"
+            placeholder="Location"
+            required
+            class="w-full px-5 py-3 border border-gray-700 rounded-md bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-200"
+          />
+        </div>
+
+        <div>
+          <label for="rating" class="sr-only">Rating</label>
+          <input
+            type="text"
+            id="rating"
+            name="rating"
+            value="<%= editing ? home.rating : ''%>"
+            placeholder="Rating (e.g., 4.5)"
+            class="w-full px-5 py-3 border border-gray-700 rounded-md bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-200"
+          />
+        </div>
+
+        <div>
+          <label for="photo" class="block text-sm font-medium text-gray-400 mb-1">Upload Photo</label>
+          <input
+            type="file"
+            id="photo"
+            name="photo"
+            accept="image/*"
+            class="w-full text-sm text-gray-300
+            file:mr-4 file:py-2 file:px-4
+            file:rounded-full file:border-0
+            file:text-sm file:font-semibold
+            file:bg-purple-500 file:text-white
+            hover:file:bg-purple-600 cursor-pointer transition duration-200"
+          />
+        </div>
+
+
+        <div>
+          <label for="description" class="sr-only">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            rows="4"
+            placeholder="Enter a detailed description of your home..."
+            required
+            class="w-full px-5 py-3 border border-gray-700 rounded-md bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-200"
+          ><%= editing ? home.description : ''%></textarea>
+        </div>
+        
+        <button
+          type="submit"
+          class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold hover:bg-purple-700 transition duration-300 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 focus:ring-offset-gray-900"
+        >
+          <%= editing ? "Update Home" : "Add Home"%>
+        </button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
