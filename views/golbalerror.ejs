@@ -1,0 +1,31 @@
+
+<%- include('../partials/head') %>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-gray-800 min-h-screen flex flex-col">
+  <%- include('../partials/nav') %>
+
+  <main class="flex flex-col justify-center items-center flex-grow font-inter px-6 text-center">
+    <div class="bg-gray-900 p-10 rounded-2xl shadow-2xl max-w-lg w-full">
+      <h1 class="text-5xl font-bold text-red-500 mb-4">Error</h1>
+      <p class="text-gray-300 text-lg mb-6">
+        Something went wrong. Don't worry — the site is fine.<br />
+        Try again or return to the homepage.
+      </p>
+
+      <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+        <p class="text-gray-400 text-sm italic mb-6">
+          <%= errorMessage %>
+        </p>
+      <% } %>
+
+      <a href="/" class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition duration-300">
+        Go Home
+      </a>
+    </div>
+  </main>
+</body>
+</html>

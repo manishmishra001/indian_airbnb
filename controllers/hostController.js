@@ -15,10 +15,10 @@ exports.getAddHome = (req, res, next) => {
     pageTitle: "Add Home to airbnb",
     currentPage: "addHome",
     editing: false,
-    isLogedin: req.session.isLoggedIn, // ✅ match name + source
+    isLogedin: req.session.isLoggedIn,
     user: req.session.user,
   });
-};
+};    
 
 
 
@@ -63,27 +63,19 @@ exports.getHostHomes = (req, res, next) => {
 exports.postAddHome = (req, res, next) => {
   const {  houseName, price, location, rating,  description } = req.body;
 
-  if(!req.file){
+  if(!req.file){[p]
     return res.status(400).send('No file uploaded.');
     return res.redirect('/host/host-home-list');
   }
   const home = new Home({houseName, price, location, rating, photo: req.file.path, description});
-  home.save().then(()=>{
+  home.save().then(()=>{ 
     console.log("Home Created");
   });
 
   res.redirect("/host/host-home-list");
 };
 
-// exports.postEditHome = (req, res, next) => {
-//   const { id, houseName, price, location, rating, photo,description } = req.body;
-//   const home = new Home(houseName, price, location, rating, photo, description);
-//   home._id = id;
-//   home.save();
-//   res.redirect("/host/host-home-list");
-// };
 
- 
 
 exports.postEditHome = (req, res, next) => {
   const { id, houseName, price, location, rating, description } = req.body;

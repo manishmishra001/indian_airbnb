@@ -26,40 +26,6 @@ const store = new MongoDBStore({
   collection: 'sessions'
 });
 
-// // Random string for filenames
-// const randomstr = (length) => {
-//   let result = '';
-//   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-//   for (let i = 0; i < length; i++) {
-//     result += characters.charAt(Math.floor(Math.random() * characters.length));
-//   }
-//   return result;
-// };
-
-// Multer storage
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, 'uploads/');
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, randomstr(10) + '-' + file.originalname);
-//   }
-// });
-
-// // Multer instance for images
-// const uploadImage = multer({
-//   storage,
-//   fileFilter: (req, file, cb) => {
-//     if (file.mimetype.startsWith('image/')) cb(null, true);
-//     else cb(new Error('Only images allowed'), false);
-//   }
-// }).single('photo'); // <input name="photo">
-
-//   { name: 'photo', maxCount: 1 },
-//   { name: 'pdf', maxCount: 1 }
-// ]);
-
-// module.exports = { uploadFiles };
 
 
 
@@ -141,10 +107,23 @@ app.use('/homes/uploads', express.static(path.join(rootDir, 'uploads')));
 
 
 // 404 error controller
-app.use(errorsController.pageNotFound);
+app.use(errorsController.pageNotFound); // 404 for wrong routes
+
+app.use((err, req, res, next) => {
+  console.error(err);
+
+  res
+    .status(404)
+    .render("globalerror", {
+      pageTitle: "Error",
+      currentPage: "globalerror",
+      isLogedin: req.isLogedin,
+      user: req.session.user || null,
+    });
+});
 
 // Connect MongoDB & start server
-const PORT = 3000;
+const PORT = 3003;
 mongoose.connect("mongodb+srv://manish1525t_db_user:manish123@rudra.wdgvr3t.mongodb.net/airbnb?retryWrites=true&w=majority&appName=rudra")
 .then(() => {
   console.log("Connected to MongoDB");
