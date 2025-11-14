@@ -1,11 +1,11 @@
 {
   "name": "chapter-10---airbnb",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "tailwind": "tailwindcss -i ./views/input.css -o ./public/output.css --watch",
-    "start": "nodemon app.js & npm run tailwind"
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
