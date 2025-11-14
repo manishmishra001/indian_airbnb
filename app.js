@@ -123,7 +123,7 @@ app.use((err, req, res, next) => {
 });
 
 // Connect MongoDB & start server
-const PORT = 3003;
+const PORT = process.env.PORT || 3001;
 mongoose.connect("mongodb+srv://manish1525t_db_user:manish123@rudra.wdgvr3t.mongodb.net/airbnb?retryWrites=true&w=majority&appName=rudra")
 .then(() => {
   console.log("Connected to MongoDB");
