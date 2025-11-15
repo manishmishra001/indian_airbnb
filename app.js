@@ -20,7 +20,6 @@ const { default: mongoose } = require('mongoose');
 
 const app = express();
 
-const MONGO_URL = "mongodb+srv://manish1525t_db_user:manish123@rudra.wdgvr3t.mongodb.net/airbnb?retryWrites=true&w=majority&appName=rudra";
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -131,7 +130,7 @@ app.use((err, req, res, next) => {
 
 // Connect MongoDB & start server
 const PORT = process.env.PORT || 3001;
-mongoose.connect(process.env.MONGO_URL)
+mongoose.connect(process.env.MONGO_URI)
 .then(() => {
   console.log("Connected to MongoDB");
   app.listen(PORT, () => {
