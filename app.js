@@ -1,6 +1,9 @@
 // Core Module
 const path = require('path');
 
+require("dotenv").config();
+
+
 // External Module
 const express = require('express');
 const session = require('express-session');
@@ -24,9 +27,10 @@ app.set('views', 'views');
 
 // MongoDB session store
 const store = new MongoDBStore({
-  uri: 'mongodb+srv://manish1525t_db_user:manish123@rudra.wdgvr3t.mongodb.net/airbnb?retryWrites=true&w=majority&appName=rudra',
+  uri: process.env.MONGO_URI,
   collection: 'sessions'
 });
+
 
 
 
@@ -68,11 +72,12 @@ app.use(express.urlencoded({ extended: true }));
 
 // Session setup
 app.use(session({
-  secret: "my secret key",
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   store
 }));
+
 
 // Set login flag
 app.use((req, res, next) => {
